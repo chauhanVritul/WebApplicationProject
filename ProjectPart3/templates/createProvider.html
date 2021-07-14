@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create Provider</title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <p class="response_Text" id="response_Text"></p>
+    <div class="view-query-body">       
+          <div class="trb"> 
+            <form action="" class="form">
+                <table style="margin-left:10px;">
+                    <tr>
+                        <td>
+                            <label class="form-label">Provider ID: </label>
+                        </td>
+                        <td>
+                            <label class="provider" id="providerID">{{ providerID }}</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Active: </label>
+                        </td>
+                        <td>
+                            <input type="radio" id="active_true" value="true" name="active" class="radio" checked>
+                            <label for="active_true" style="color:beige;">True</label>
+                            <input type="radio" id="active_false" value="false" name="active" class="radio">
+                            <label for="active_false" style="color:beige;">False</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Name: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="name" class = "input-box" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Qualification:<br><span class="label_bracket">(seperate with commas)</span></label>
+                        </td>
+                        <td>
+                            <input type="text" id="qualf" class = "input-box input" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Speciality:<br><span class="label_bracket">(seperate with commas)</span></label>
+                        </td>
+                        <td>
+                            <input type="text" id="specs" class = "input-box input" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Phone: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="phone" class = "input-box input" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Department: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="dept" class = "input-box input" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Organization: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="orgn" class = "input-box input" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Location: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="loc" class = "input-box input" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Address: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="addr" class = "input-box input" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <input type="submit" class="buttons" style="margin:0px;" onclick="sendData()" id="submit_button" value="SUBMIT">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <button class="buttons back-button" onclick="goBack()">BACK</button>
+    </div>
+    <script type="text/javascript">
+        function goBack(){
+            window.location='/index.html';
+        }
+        
+        function sendData(){
+            const url_to = '/?providerID='+document.getElementById('providerID').innerHTML;
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url_to, true);
+
+            xhr.onload = function(){
+                const responseObj = JSON.parse(this.responseText);
+                if (responseObj["response"] === "success"){
+                    alert("Provider added successfully!");
+                }
+                else {
+                    alert("Error Code:"+responseObj["response"].status_code+"\n"+responseObj["response"].detail);
+                }
+            }
+
+            var provider = {
+                "active":document.getElementById('active_true').checked,
+                "name":document.getElementById("name").value,
+                "qualification":document.getElementById("qualf").value,
+                "speciality":document.getElementById("specs").value,
+                "phone":document.getElementById("phone").value,
+                "department":document.getElementById("dept").value,
+                "organization":document.getElementById("orgn").value,
+                "location":document.getElementById("loc").value,
+                "address":document.getElementById("addr").value
+            };
+
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send(JSON.stringify( provider ));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+}
+
+.all-body {
+    background-color: #9d8d8e;
+    padding: 0;
+    margin: 0;
+}
+
+.main-header {
+    background-color: #46344e;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #5b5561;
+}
+
+.title-head {
+    font-size: 120px;
+    font-family:'Lucida Sans';
+    color:#faed25;
+
+}
+
+/* .crud {
+    display: flex;
+    flex:1;
+} */
+
+.section-link {
+    font-size: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 50px;
+    font-family: monospace;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-decoration: none;;
+
+}
+
+.section-link:hover {
+    text-decoration: none;
+    color: #faed25; 
+}
+
+
+.site-section {
+    display: flex;
+    align-items: center;
+    flex:1;
+}
+
+.crud{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.view {
+    background-color: #46344e;
+}
+
+.viewall {
+    background-color: #46344e;
+}
+
+.create {
+    background-color: #5b5561;
+}
+
+.update {
+    background-color: #46344e;
+}
+
+.delete {
+    background-color: #5b5561;
+}
+
+.link-border {
+    border: 1px solid #5b5561;
+}
+
+.empty-box {
+    width:100%;
+    background-color: #9d8d8e;
+    height: 100px;
+}
+
+.footer {
+    font-size: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 50px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color:#5b5561;
+    text-align: center;
+}
+
+.trb {
+    background: #46344e;
+    width: 50%;
+    height:600px;
+    border-radius: 30px;
+    display: flex;
+    margin:150px;
+    justify-content: center;
+    align-items: center;
+  }
+
+.view-query-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 30px;
+    color:#faed25;
+    font-weight: bold;
+}
+
+.input-box {
+    font-size: 30px;
+    color: black;
+    width: 100%;
+}
+.buttons {
+    border: 1px solid darkolivegreen;
+    background-color:beige;
+    width: 100px;
+    height: 50px;
+    margin:20px;
+    font-size:20px;
+    font-weight: normal;
+}
+
+.buttons:hover {
+    background-color: #faed25;
+    color:#46344e;
+}
+
+.data_table {
+    display: inline;
+    border: 1px solid #080D4D;
+    background-color: #9a786f;
+    border-collapse: collapse;
+    color: #faed25;
+    margin-right: 20px;
+}
+
+.provider_data {
+    line-height: 45px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 30px;
+    color:#edf5e0;
+}
+
+.dtl {
+    color: #faed25;
+    display: inline;
+}
+
+.pnf {
+    color: #faed25;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size:50px;
+}
+
+.back-button {
+    position:relative;
+    margin:0px;
+    bottom: 80px;
+    font-weight: bold;
+}
+
+.label_bracket {
+    margin-left:10px;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d1d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #faed25;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+.table_background {
+    height:90%;
+    width:95%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    background-color: #d1d1d1;
+}
+
+.all_data_table {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    text-align: left;
+    padding: 10px;
+    border: 2px solid #46344e;
+}
+
+.all_data_tablehead {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    text-align: left;
+    padding:10px;
+    background-color: #9d8d8e;
+    border: 2px solid #46344e;
+    color:#faed25;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;;
+
+}
+
+.data_table_main {
+    width:max-content;
+    margin: 10px;
+    border-collapse: collapse;
+}
+
+.provider {
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #edf5e0;
+}
+
+.dropdown {
+    font-size: 30px;
+    color: black;
+}
+
+.big_buttons {
+    width: 40%;
+}

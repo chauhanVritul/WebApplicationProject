@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Web Application Project</title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <header class="main-header">
+        <h1 class="title-head">Web Application Project</h1>
+    </header>
+    <section class="row">
+        <div class="empty-box"> </div>
+    </section>   
+    <section class="row">
+        
+        <ul class="crud">
+            <li class="site-section view link-border">
+                <a href="/views" class="section-link">View</a>
+            </li>
+            <li class="site-section create link-border"> 
+                <a href="/create" class="section-link">Create</a>
+            </li>
+            <li class="site-section update link-border">
+                <a href="/update" class="section-link">Update</a>
+            </li>
+            <li class="site-section delete link-border">
+                <a href="/delete" class="section-link">Delete</a>
+            </li>
+        </ul>
+    </section>
+    <section class="row">
+        <div class="empty-box footer">_vritul chauhan_</div>
+    </section>   
+</body>
+</html>

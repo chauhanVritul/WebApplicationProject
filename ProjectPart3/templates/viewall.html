@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>View Provider</title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <div class="view-query-body">
+        <div class="trb">
+            <form action="" class="form">
+                <table>
+                    <tr>
+                        <td>
+                            <label class="form-label">Provider ID: </label>
+                        </td>
+                        <td>
+                            <select name="providerID" id="providerID" class="dropdown">
+                                <option disabled selected value>-- -- -- -- -- -- -- -- --</option>
+                                {% for value in providerList %}
+                                <option value="{{ value }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <input type="button" onclick="viewProviderByID()" value="Search by ProviderID" class="buttons big_buttons">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label class="form-label">Name: </label>
+                        </td>
+                        <td>
+                            <select name="name" id="name" class="dropdown">
+                                <option disabled selected value>-- -- -- -- -- -- -- -- --</option>
+                                {% for eachName in nameList %}
+                                <option value="{{ eachName }}">{{ eachName }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <input type="button" onclick="viewProviderByName()" value="Search by Name" class="buttons big_buttons">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;" colspan="2">
+                            <input type="button" onclick="viewProviderAll()" value="Show all" class="buttons">
+                        </td>
+                    </tr>
+
+                </table>  
+            </form>
+        </div>
+        <button class="buttons back-button" onclick="goBack()">BACK</button>
+    </div>
+    <script>
+        function goBack(){
+            window.location ='/index.html';
+        }
+
+        function viewProviderByID(){
+            provID = document.getElementById('providerID').value;
+            if (provID != ""){
+                document.location = "/viewbyID?providerID="+provID;
+            }            
+        }
+
+        function viewProviderByName(){
+            name = document.getElementById('name').value
+            if (name != ""){
+                document.location = "/viewbyID?name="+name;
+            }            
+        }
+
+        function viewProviderAll(){
+            document.location = "/viewall";
+        }
+    </script>
+</body>
+</html>

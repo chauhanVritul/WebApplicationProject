@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Delete Provider</title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <p class="response_Text" id="response_Text"></p>
+    <div class="view-query-body">       
+          <div class="trb">
+            <form action="" class="form">
+                <table>
+                    <tr>
+                        <td>
+                            <label class="form-label">Provider ID: </label>
+                        </td>
+                        <td>
+                            <select name="providerID" id="providerID" class="dropdown" autocomplete="off">
+                                <option disabled selected value>Choose ProviderID</option>
+                                {% for value in providerList %}
+                                <option value="{{ value }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <input type="button" onclick="deleteProviderByID()" value="DELETE" class="buttons big_buttons">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <button class="buttons back-button" onclick="goBack()">BACK</button>
+    </div>
+    <script>
+        function goBack(){
+            window.location = '/index.html';
+        }
+        
+        function deleteProviderByID(){
+            var xhr = new XMLHttpRequest();
+            var provid = document.getElementById('providerID').value;
+            if (provid === ''){
+                alert("Choose a providerID first");
+                return ;
+            }
+            xhr.open("DELETE", "/?providerID="+document.getElementById('providerID').value, true);
+            xhr.onload = function(){
+                const responseObj = JSON.parse(this.responseText);
+                if (responseObj["response"] === "success"){
+                    alert("Provider deleted successfully!");
+                }
+                else {
+                    alert("Error Code:"+responseObj["response"].status_code+"\n"+responseObj["response"].detail);
+                }
+            }
+            xhr.send();
+            window.location = "/delete";
+        }
+    </script>
+</body>
+</html>

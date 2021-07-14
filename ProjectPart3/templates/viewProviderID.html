@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> 
+        VIEW PROVIDER
+    </title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <div class="view-query-body">
+        <div class="trb" style="width:60%;">
+            <table>
+                <tr>
+                    <td>
+                        <div class="form-label">Provider ID: </div>
+                    </td>
+                    <td>
+                        <div id="providerID" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Active: </div>
+                    </td>
+                    <td>
+                        <div id="active" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Name: </div>
+                    </td>
+                    <td>
+                        <div id="name" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Qualification:<br><span class="label_bracket">(seperate with commas)</span></div>
+                    </td>
+                    <td>
+                        <div id="qualf" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Speciality:<br><span class="label_bracket">(seperate with commas)</span></div>
+                    </td>
+                    <td>
+                        <div id="specs" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Phone: </div>
+                    </td>
+                    <td>
+                        <div id="phone" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Department: </div>
+                    </td>
+                    <td>
+                        <div id="dept" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Organization: </div>
+                    </td>
+                    <td>
+                        <div id="orgn" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Location: </div>
+                    </td>
+                    <td>
+                        <div id="locn" class="provider_data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-label">Address: </div>
+                    </td>
+                    <td>
+                        <div id="addr" class="provider_data"></div>
+                    </td>
+            </table>
+        </div>
+        <button class="buttons back-button" onclick="goBack()">BACK</button>      
+    </div>
+    <script>
+        function goBack(){
+            window.location = "/views";
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const providerID = urlParams.get("providerID");
+        const providerName = urlParams.get("name");
+        var url_to;
+        console.log(providerName);
+        console.log(providerID);
+        if (providerName == null){
+            url_to = "/?providerID="+providerID;
+        }
+        else {
+            url_to = "/?name="+providerName;
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url_to, true);
+        xhr.onload = function() {
+            const responseObj = JSON.parse(this.responseText);
+            if (responseObj["response"] === "success"){
+                responseData = responseObj["data"];
+                document.getElementById("providerID").innerHTML = responseData["providerID"];
+                document.getElementById("active").innerHTML = responseData["active"];
+                document.getElementById("name").innerHTML = responseData["name"];
+                document.getElementById("qualf").innerHTML = responseData["qualification"];
+                document.getElementById("specs").innerHTML = responseData["speciality"];
+                document.getElementById("phone").innerHTML = responseData["phone"];
+                document.getElementById("dept").innerHTML = responseData["department"];
+                document.getElementById("orgn").innerHTML = responseData["organization"];
+                document.getElementById("locn").innerHTML = responseData["location"];
+                document.getElementById("addr").innerHTML = responseData["address"];
+
+            }
+            else {
+                    alert("Error Code:"+responseObj["response"].status_code+"\n"+responseObj["response"].detail);
+                }
+        }
+        xhr.setRequestHeader("Content-type","application/json");
+        xhr.send();
+    </script>
+</body>
+</html>

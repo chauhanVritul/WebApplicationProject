@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Provider</title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <p class="response_Text" id="response_Text"></p>
+    <div class="view-query-body">       
+          <div class="trb">
+            <form action="" class="form" id="form_class">
+                <Table style="margin-left:10px;">
+                    <tr>
+                        <td>
+                            <label class="form-label">Provider ID: </label>
+                        </td>
+                        <td>
+                            <select name="providerID" id="providerID" class="dropdown">
+                                <option disabled selected value>Choose ProviderID</option>
+                                {% for key in providerList %}
+                                <option value="{{ key }}">{{ key }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Active: </label>
+                        </td>
+                        <td>
+                            <input type="radio" id="active_true" value="true" name="active" class="radio" checked>
+                            <label for="active_true" style="color:beige;">True</label>
+                            <input type="radio" id="active_false" value="false" name="active" class="radio">
+                            <label for="active_false" style="color:beige;">False</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Name: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="name" class = "input-box" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Qualification:<br><span class="label_bracket">(seperate with commas)</span></label>
+                        </td>
+                        <td>
+                            <input type="text" id="qualf" class = "input-box input" autocomplete="off" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Specifications:<br><span class="label_bracket">(seperate with commas)</span></label>
+                        </td>
+                        <td>
+                            <input type="text" id="specs" class = "input-box input" autocomplete="off" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Phone: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="phone" class = "input-box input" autocomplete="off" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Department: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="dept" class = "input-box input" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Organization: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="orgn" class = "input-box input" autocomplete="off" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Location: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="loc" class = "input-box input" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="form-label">Address: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="addr" class = "input-box input" autocomplete="off" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <input type="submit" class="buttons" style="margin:0px;" onclick="updateData()" id="submit_button" value="SUBMIT">
+                        </td>
+                    </tr>
+                </Table>
+            </form>
+        </div>
+        <button class="buttons back-button" onclick="goBack()">BACK</button>
+    </div>
+    <script>
+        function goBack(){
+            window.location='/index.html';
+        }
+        function updateData(){
+            const selectedProvider = document.getElementById('providerID').value;
+            if (selectedProvider === ''){
+                alert("Choose a ProviderID first");
+                return ;
+            }
+            const url_to = '/?providerID='+selectedProvider;
+            const xhr = new XMLHttpRequest();
+            xhr.open("PUT", url_to, true);
+
+            xhr.onload = function(){
+                const responseObj = JSON.parse(this.responseText);
+                if (responseObj["response"] === "success"){
+                    alert("Provider updated successfully!")
+                }
+                else {
+                    alert("Error Code:"+responseObj["response"].status_code+"\n"+responseObj["response"].detail);
+                }
+            }
+
+            var provider = {
+                "active":document.getElementById('active_true').checked
+            };
+
+            if (document.getElementById("name").value !== ''){ provider["name"]=document.getElementById("name").value; }
+            if (document.getElementById("qualf").value !== ''){ provider["qualification"]=document.getElementById("qualf").value; }
+            if (document.getElementById("specs").value !== ''){ provider["speciality"]=document.getElementById("specs").value; }
+            if (document.getElementById("phone").value !== ''){ provider["phone"]=document.getElementById("phone").value; }
+            if (document.getElementById("dept").value !== ''){ provider['department']=document.getElementById("dept").value; }
+            if (document.getElementById("orgn").value !== ''){ provider['organization']=document.getElementById("orgn").value; }
+            if (document.getElementById("loc").value !== ''){ provider['location']=document.getElementById("loc").value; }
+            if (document.getElementById("addr").value !== ''){ provider['address']=document.getElementById("addr").value; }
+
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send(JSON.stringify( provider ));
+        }
+    </script>
+</body>
+</html>

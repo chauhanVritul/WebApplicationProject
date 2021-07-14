@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>All Providers</title>
+    <link rel="stylesheet" href= {{ url_for('static', path='/style.css') }}>
+    <link rel="shortcut icon" href={{ url_for('static', path='/favicon.ico') }}>
+</head>
+<body class="all-body">
+    <div class="view-query-body">
+        <div class="trb" style="width:80%;">
+            <div class="table_background">
+                <table class="data_table_main">
+                    <tr>
+                        <th class="all_data_tablehead">Provider ID</th>
+                        <th class="all_data_tablehead">Active</th>
+                        <th class="all_data_tablehead">Name</th>
+                        <th class="all_data_tablehead">Qualification</th>
+                        <th class="all_data_tablehead">Speciality</th>
+                        <th class="all_data_tablehead">Phone</th>
+                        <th class="all_data_tablehead">Department</th>
+                        <th class="all_data_tablehead">Organizaton</th>
+                        <th class="all_data_tablehead">Location</th>
+                        <th class="all_data_tablehead">Address</th>
+                    </tr>
+                    {% for value in data.values() %}
+                    <tr>
+                        <td class="all_data_table">{{ value['providerID'] }}</td>
+                        <td class="all_data_table">{{ value['active'] }}</td>
+                        <td class="all_data_table">{{ value['name'] }}</td>
+                        <td class="all_data_table">{{ value['qualification'] }}</td>
+                        <td class="all_data_table">{{ value['speciality'] }}</td>
+                        <td class="all_data_table">{{ value['phone'] }}</td>
+                        <td class="all_data_table">{{ value['department'] }}</td>
+                        <td class="all_data_table">{{ value['organization'] }}</td>
+                        <td class="all_data_table">{{ value['location'] }}</td>
+                        <td class="all_data_table">{{ value['address'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <button class="buttons back-button" onclick="goBack()">BACK</button>
+    </div>
+    <script>
+        function goBack(){
+            window.location ='/views';
+        }
+    </script>
+</body>
+</html>
